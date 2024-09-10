@@ -118,7 +118,6 @@ id SERIAL PRIMARY KEY,
 CREATE pais(
 id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    otro VARCHAR(100) NOT NULL
 );
 
 CREATE estado(
@@ -138,36 +137,6 @@ id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     id_municipio FOREIGN KEY REFERENCES municipio(id)
 );
-
-
-CREATE TRIGGER paciente_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON paciente
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
-CREATE TRIGGER historial_medico_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON historial_medico
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
-CREATE TRIGGER medicamento_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON medicamento
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
-CREATE TRIGGER citas_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON citas
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
-CREATE TRIGGER usuario_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON usuario
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
-CREATE TRIGGER doctor_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON doctor
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
-CREATE TRIGGER enfermera_audit_trg
-AFTER INSERT OR UPDATE OR DELETE ON enfermera
-FOR EACH ROW EXECUTE FUNCTION audit_func('id');
-
 
 CREATE OR REPLACE FUNCTION audit_func()
 RETURNS TRIGGER AS $$
@@ -212,3 +181,32 @@ BEGIN
     RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER paciente_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON paciente
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+CREATE TRIGGER historial_medico_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON historial_medico
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+CREATE TRIGGER medicamento_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON medicamento
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+CREATE TRIGGER citas_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON citas
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+CREATE TRIGGER usuario_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON usuario
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+CREATE TRIGGER doctor_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON doctor
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+CREATE TRIGGER enfermera_audit_trg
+AFTER INSERT OR UPDATE OR DELETE ON enfermera
+FOR EACH ROW EXECUTE FUNCTION audit_func('id');
