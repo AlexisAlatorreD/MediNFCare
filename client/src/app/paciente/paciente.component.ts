@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class PacienteComponent {
 
+  isMinimized: boolean = false;
+
+  toggleSidebar() {
+    this.isMinimized = !this.isMinimized;
+  }
+  
 }

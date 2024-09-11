@@ -1,48 +1,42 @@
-<div class="flex">
-    <!-- Inicio del slidebar -->
-    <div class="fixed top-0 left-0 h-screen bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300"
+<div class="flex h-screen">
+    <!-- Sidebar principal -->
+    <div class="fixed top-0 left-0 h-screen bg-blue-100 border-r border-blue-200 transition-all duration-300 shadow-lg z-20"
         [ngClass]="{'w-64': !isMinimized, 'w-16': isMinimized}">
-
-        <!-- Logotipo -->
+        <!-- Logotipo (Aquí puedes poner la imagen) -->
         <div class="flex justify-center items-center p-4">
-            <a href="#" class="bg-black text-white p-2 rounded transition-all duration-300"
-                *ngIf="!isMinimized; else logo">
-                MediNFCare
-            </a>
+            <img *ngIf="!isMinimized" src="../assets/img/MediNFCare.png" width="120" height="120" alt="Logotipo" class="rounded-lg">
             <ng-template #logo>
-                <a href="#" class="bg-black text-white p-2 rounded transition-all duration-300">
-                    M
-                </a>
+                <img src="./../assets/img/MediNFCare.png" alt="Logo reducido" width="50" height="50" class="rounded-lg">
             </ng-template>
         </div>
 
-        <!-- Navigation Menu -->
+        <!-- Menú de navegación -->
         <nav class="mt-8">
             <ul class="space-y-4">
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center p-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-200 rounded-md transition-colors duration-200"
                         [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                         </svg>
-                        <span class="ml-3" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                        <span class="ml-3 text-sm font-semibold text-gray-700" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
                             Dashboard
                         </span>
                     </a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center justify-center p-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-200 rounded-md transition-colors duration-200"
                         [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <circle cx="9" cy="7" r="4" />
                             <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
                         </svg>
-                        <span class="ml-3" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                        <span class="ml-3 text-sm font-semibold text-gray-700" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
                             Users
                         </span>
                     </a>
@@ -51,12 +45,37 @@
         </nav>
     </div>
 
-    <!-- Botón de desplazamiento -->
-    <div class="flex-1 transition-all duration-300" [ngClass]="{'ml-64': !isMinimized, 'ml-16': isMinimized}">
-        <button (click)="toggleSidebar()" class="m-4 p-2 text-black rounded-lg">
-            <i class="fa-solid" [ngClass]="{'fa-bars': isMinimized, 'fa-times': !isMinimized}"></i>
-        </button>
-        <br>
-    </div>
+    <!-- Contenedor principal -->
+    <div class="flex-1 flex flex-col">
+        <!-- Menú superior -->
+        <div class="fixed top-0 right-0 h-16 bg-blue-200 flex items-center justify-between px-4 shadow-md z-10 transition-all duration-300"
+            [ngClass]="{'left-64': !isMinimized, 'left-16': isMinimized}">
+            <button (click)="toggleSidebar()" class="m-4 p-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
+                <i class="fa-solid" [ngClass]="{'fa-bars': isMinimized, 'fa-times': !isMinimized}"></i>
+            </button>
+            <!-- Buscador -->
+            <div class="flex items-center w-full max-w-xs ml-4">
+                <input type="text" placeholder="Buscar..." class="w-full p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
 
+            <!-- Botones de iconos -->
+            <div class="flex space-x-4">
+                <a routerLink="/paciente" ><button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+                    <i class="fa-solid fa-user"></i>
+                </button></a>
+                <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+                <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+                    <i class="fa-solid fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 transition-all duration-300" [ngClass]="{'ml-64': !isMinimized, 'ml-16': isMinimized}">
+            <!-- Aquí va el contenido dinámico -->
+            
+        </main>
+    </div>
 </div>
