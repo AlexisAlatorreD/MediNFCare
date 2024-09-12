@@ -1,0 +1,95 @@
+<div class="flex">
+    <app-menu></app-menu>
+    
+    <div class="flex-1 mt-4 transition-all duration-300 mt-4">
+        
+        <div class="flex">
+            <!-- Left section: Meetings -->
+            <div class="w-2/3">
+              <h2 class="text-xl font-semibold mb-6">Upcoming meetings</h2>
+              <div *ngFor="let meeting of meetings" class="flex items-start mb-6">
+                <img
+                  class="w-12 h-12 rounded-full mr-4"
+                  [src]="meeting.imageUrl"
+                  alt="{{ meeting.name }}"
+                />
+                <div>
+                  <h3 class="font-semibold">{{ meeting.name }}</h3>
+                  <div class="text-gray-500">
+                    <p class="flex items-center">
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10m-4 0v4m0 0v4m-4-4v4m0-4v4M3 21h18"
+                        ></path>
+                      </svg>
+                      {{ meeting.date }}
+                    </p>
+                    <p class="flex items-center mt-1">
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 12.414m0 0L7 6M6 21h12a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                      {{ meeting.location }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <!-- Right section: Calendar -->
+            <div class="w-1/3">
+              <div class="p-4 border rounded-lg shadow-lg">
+                <h2 class="text-lg font-semibold text-center mb-4">January</h2>
+                <div class="grid grid-cols-7 gap-2">
+                  <div class="text-center font-bold">M</div>
+                  <div class="text-center font-bold">T</div>
+                  <div class="text-center font-bold">W</div>
+                  <div class="text-center font-bold">T</div>
+                  <div class="text-center font-bold">F</div>
+                  <div class="text-center font-bold">S</div>
+                  <div class="text-center font-bold">S</div>
+                  <!-- Days -->
+                  <ng-container *ngFor="let day of [].constructor(31); let i = index">
+                    <div
+                      class="text-center p-2 rounded-full cursor-pointer"
+                      [ngClass]="{
+                        'bg-blue-500 text-white': i === 21,
+                        'hover:bg-gray-200': i !== 21
+                      }"
+                    >
+                      {{ i + 1 }}
+                    </div>
+                  </ng-container>
+                </div>
+                <button
+                  class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+                >
+                  Add event
+                </button>
+              </div>
+            </div>
+          </div>
+          
+
+    </div>
+    
+</div>
