@@ -32,7 +32,8 @@ switch ($request_method) {
   case 'GET':
     if (strpos($request_uri, '/api/usuario') !== false) {
         include_once $baseDir . '/controller/usuario.php';
-    
+      }else if (strpos($request_uri, '/api/login') !== false) {
+        include_once $baseDir . '/controller/login.php';
       }else if (strpos($request_uri, '/api/inegi') !== false) {
         include_once $baseDir . '/controller/inegi.php';
       } elseif (strpos($request_uri, '/api/status') !== false) {
