@@ -14,6 +14,8 @@ import { RegistrarComponent } from './admin/registrar/registrar.component';
 
 import { MenuComponent } from './menu/menu.component';
 import { PerfilComponent } from './doctor/perfil/perfil.component';
+import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { PerfilComponent } from './doctor/perfil/perfil.component';
     LoginComponent,
     RegistrarComponent,
     MenuComponent,
-    PerfilComponent
+    PerfilComponent,
+    PrincipalDoctorComponent
   ],
   imports: [
     BrowserModule,

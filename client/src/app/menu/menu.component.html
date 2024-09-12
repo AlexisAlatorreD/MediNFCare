@@ -14,7 +14,7 @@
         <nav class="mt-8">
             <ul class="space-y-4">
                 <li>
-                    <a href="#"
+                    <a routerLink="/doctor/principal"
                         class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-200 rounded-md transition-colors duration-200"
                         [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
                         <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -23,7 +23,7 @@
                                 d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                         </svg>
                         <span class="ml-3 text-sm font-semibold text-gray-700" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Dashboard
+                            Inicio
                         </span>
                     </a>
                 </li>
