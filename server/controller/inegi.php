@@ -5,43 +5,48 @@ header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Tu clave API del INEGI
-$apiKey = "84bb354c-4a26-4b01-9d35-8cada05e58aa";
 
-// Código postal que quieres consultar
-$codigoPostal = "63660";  // Aquí colocas el código postal
+// Token de autenticación proporcionado por el servicio de la API
+$token = 'dec70686-034d-41d0-9125-4c41aad3db15'; // Reemplaza con tu token
+$codigo_postal = '63660'; // Código postal a buscar
 
-// URL de la API del INEGI (asegúrate de usar la URL correcta de la API)
-$url = "https://www.inegi.org.mx/app/api/denue/v1/consulta/Buscar/CP/63660/84bb354c-4a26-4b01-9d35-8cada05e58aa";
+// URL de la API que devuelve los datos de estado, municipio y localidad de México
+$url = "https://api-sepomex.hckdrk.mx/query/info_cp/$codigo_postal?type=simplified";
 
-// Hacemos la solicitud a la API usando file_get_contents
-$response = file_get_contents($url);
+// Inicializa cURL
+$curl = curl_init($url);
 
-// Verificamos que haya una respuesta válida
-if ($response === false) {
-    echo json_encode(["error" => "No se pudo conectar con la API del INEGI."]);
-    exit;
+// Configura las opciones de cURL
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+    "Authorization: Bearer $token", // Agrega el token a la cabecera
+));
+
+// Ejecuta la petición y obtiene la respuesta
+$response = curl_exec($curl);
+
+// Verifica si hay errores en la petición
+if (curl_errno($curl)) {
+    echo 'Error:' . curl_error($curl);
 }
 
-// Decodificamos el JSON de la respuesta
+// Cierra cURL
+curl_close($curl);
+
+// Decodifica la respuesta JSON
 $data = json_decode($response, true);
 
-// Verificamos si los datos se decodificaron correctamente
-if (isset($data)) {
-    // Extraemos el estado, municipio y localidad
-    foreach ($data as $item) {
-        $estado = $item['estado'] ?? 'No disponible';
-        $municipio = $item['municipio'] ?? 'No disponible';
-        $localidad = $item['localidad'] ?? 'No disponible';
+// Verifica si la respuesta contiene datos válidos
+if (isset($data['response'])) {
+    $estado = $data['response']['estado'];
+    $municipio = $data['response']['municipio'];
+    $localidad = $data['response']['ciudad'];
 
-        // Mostramos la información
-        echo json_encode([
-            "estado" => $estado,
-            "municipio" => $municipio,
-            "localidad" => $localidad
-        ]);
-    }
+    echo "Estado: $estado\n";
+    echo "Municipio: $municipio\n";
+    echo "Localidad: $localidad\n";
 } else {
-    echo json_encode(["error" => "No se encontraron datos para este código postal."]);
+    echo json_encode(["error" => "No se encontraron datos para este codigo postal.{$codigo_postal}"]);
 }
+
 ?>
