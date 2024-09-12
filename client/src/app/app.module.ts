@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegistrarComponent } from './admin/registrar/registrar.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { EnfermeroComponent } from './enfermero/enfermero.component';
-import { ParamedicoComponent } from './paramedico/paramedico.component';
-import { PacienteComponent } from './paciente/paciente.component';
+
+
+
+
 import { MenuComponent } from './menu/menu.component';
+import { PerfilComponent } from './doctor/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +21,8 @@ import { MenuComponent } from './menu/menu.component';
     PrincipalComponent,
     LoginComponent,
     RegistrarComponent,
-    DoctorComponent,
-    EnfermeroComponent,
-    ParamedicoComponent,
-    PacienteComponent,
-    MenuComponent
+    MenuComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
