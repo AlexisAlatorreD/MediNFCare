@@ -9,26 +9,30 @@ export class PrincipalDoctorComponent {
   meetings = [
     {
       name: 'Leslie Alexander',
-      date: 'January 10th, 2022 at 5:00 PM',
-      location: 'Starbucks',
+      date: '10 de enero, 2022 a las 5:00 PM',
+      location: 'Sala 1',
+      notes: 'Consulta de seguimiento sobre dolor de espalda',
       imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
     },
     {
       name: 'Michael Foster',
-      date: 'January 12th, 2022 at 3:00 PM',
-      location: 'Tim Hortons',
+      date: '12 de enero, 2022 a las 3:00 PM',
+      location: 'Sala 2',
+      notes: 'Primera consulta para revisión general',
       imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg',
     },
     {
       name: 'Dries Vincent',
-      date: 'January 12th, 2022 at 5:00 PM',
-      location: 'Costa Coffee at Braehead',
+      date: '12 de enero, 2022 a las 5:00 PM',
+      location: 'Sala 3',
+      notes: 'Revisión de resultados de laboratorio',
       imageUrl: 'https://randomuser.me/api/portraits/men/3.jpg',
     },
     {
       name: 'Lindsay Walton',
-      date: 'January 14th, 2022 at 10:00 AM',
-      location: 'Silverburn',
+      date: '14 de enero, 2022 a las 10:00 AM',
+      location: 'Sala 4',
+      notes: 'Consulta sobre dolor abdominal persistente',
       imageUrl: 'https://randomuser.me/api/portraits/women/4.jpg',
     },
   ];
