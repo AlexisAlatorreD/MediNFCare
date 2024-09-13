@@ -1,7 +1,7 @@
 <?php
 class Login {
     private $conn;
-    private $table_name = "Usuario";
+    private $table_name = "usuario";
     private $table_token = "token_sesion";
 
     public $id;

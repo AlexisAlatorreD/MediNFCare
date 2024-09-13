@@ -30,12 +30,10 @@ $request_uri = $_SERVER['REQUEST_URI'];
 switch ($request_method) {
   case 'POST':
   case 'GET':
-    if (strpos($request_uri, '/api/usuario') !== false) {
+    if (strpos($request_uri, '/server/usuario') !== false) {
         include_once $baseDir . '/controller/usuario.php';
       }else if (strpos($request_uri, '/server/login') !== false) {
         include_once $baseDir . '/controller/login.php';
-      }else if (strpos($request_uri, '/server/inegi') !== false) {
-        include_once $baseDir . '/controller/inegi.php';
       } elseif (strpos($request_uri, '/server/status') !== false) {
         header('Content-Type: application/json');
         echo json_encode(array("message" => "Servidor funcionando correctamente"));

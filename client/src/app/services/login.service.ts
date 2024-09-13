@@ -20,7 +20,7 @@ export interface Usuario {
 
 export class LoginService {
 
-  URL = 'http://localhost/medinfcare/server/login';
+  URL = 'http://localhost/medinfcare/server/usuario';
 
   constructor(private http: HttpClient) { }
 

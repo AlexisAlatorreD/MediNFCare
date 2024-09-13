@@ -1,8 +1,9 @@
 --ANGULAR Y PHP
 CREATE TABLE persona (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
+    nombres VARCHAR(100) NOT NULL,
+    primer_apellido VARCHAR(100) NOT NULL,
+    segundo_apellido VARCHAR(100) DEFAULT NULL,
     telefono VARCHAR(20),
     correo VARCHAR(100) UNIQUE,
     direccion TEXT,
@@ -233,3 +234,59 @@ FOR EACH ROW EXECUTE FUNCTION audit_func('id');
 CREATE TRIGGER enfermera_audit_trg
 AFTER INSERT OR UPDATE OR DELETE ON enfermera
 FOR EACH ROW EXECUTE FUNCTION audit_func('id');
+
+
+-- Permisos CRUD para diferentes funcionalidades
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Crear usuario', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Leer usuario', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Actualizar usuario', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Eliminar usuario', true);
+
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Crear paciente', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Leer paciente', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Actualizar paciente', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Eliminar paciente', true);
+
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Crear cita', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Leer cita', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Actualizar cita', true);
+INSERT INTO permiso (nombre_permiso, estado) VALUES ('Eliminar cita', true);
+
+
+-- Roles que tendrán distintos permisos
+INSERT INTO rol (nombre_rol, estado) VALUES ('Administrador', true);
+INSERT INTO rol (nombre_rol, estado) VALUES ('Doctor', true);
+INSERT INTO rol (nombre_rol, estado) VALUES ('Enfermero', true);
+INSERT INTO rol (nombre_rol, estado) VALUES ('Paciente', true);
+
+
+-- Asignación de permisos al rol de Administrador (tendrá todos los permisos)
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 1); -- Crear usuario
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 2); -- Leer usuario
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 3); -- Actualizar usuario
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 4); -- Eliminar usuario
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 5); -- Crear paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 6); -- Leer paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 7); -- Actualizar paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 8); -- Eliminar paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 9); -- Crear cita
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 10); -- Leer cita
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 11); -- Actualizar cita
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (1, 12); -- Eliminar cita
+
+-- Asignación de permisos al rol de Doctor (CRUD sobre pacientes y citas)
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 5); -- Crear paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 6); -- Leer paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 7); -- Actualizar paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 9); -- Crear cita
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 10); -- Leer cita
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 11); -- Actualizar cita
+
+-- Asignación de permisos al rol de Enfermero (Puede crear, leer y actualizar pacientes, pero no eliminar)
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 5); -- Crear paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 6); -- Leer paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 7); -- Actualizar paciente
+
+-- Asignación de permisos al rol de Paciente (Solo lectura de citas y sus propios datos)
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (4, 6); -- Leer paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (4, 10); -- Leer cita
