@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';  
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { HttpClientModule } from '@angular/common/http';
 
 //Componentes
 import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegistrarComponent } from './admin/registrar/registrar.component';
+import { HistorialComponent } from './doctor/historial/historial.component';
 
 
 
@@ -37,7 +39,8 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule // Asegúrate de importar FormsModule  
+    FormsModule, // Asegúrate de importar FormsModule  
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

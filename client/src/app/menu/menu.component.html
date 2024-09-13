@@ -1,6 +1,6 @@
 <div class="flex h-screen">
     <!-- Sidebar principal -->
-    <div class="fixed top-0 left-0 h-screen bg-blue-100 border-r border-blue-200 transition-all duration-300 shadow-lg z-20"
+    <div class="fixed top-0 left-0 h-screen bg-[#1b4f72]  border-blue-50 transition-all duration-300 shadow-lg z-20"
         [ngClass]="{'w-64': !isMinimized, 'w-16': isMinimized}">
         <!-- Logotipo (Aquí puedes poner la imagen) -->
         <div class="flex justify-center items-center p-4">
@@ -20,7 +20,7 @@
             <ul class="space-y-4">
                 <li>
                     <a routerLink="/doctor/principal"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-200 rounded-md transition-colors duration-200"
+                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
                         [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
                         <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
                         <span class="ml-3 text-sm font-semibold text-gray-700" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
@@ -45,10 +45,10 @@
     <!-- Contenedor principal -->
     <div class="flex-1 flex flex-col">
         <!-- Menú superior -->
-        <div class="fixed top-0 right-0 h-16 bg-blue-200 flex items-center justify-between px-4 shadow-md z-10 transition-all duration-300"
+        <div class="fixed top-0 right-0  h-16 bg-[#85C1E9]  flex items-center justify-between px-4 shadow-md z-10 transition-all duration-300"
             [ngClass]="{'left-64': !isMinimized, 'left-16': isMinimized}">
-            <button (click)="toggleSidebar()" class="m-4 p-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
-                <i class="fa-solid" [ngClass]="{'fa-bars': isMinimized, 'fa-times': !isMinimized}"></i>
+            <button (click)="toggleSidebar()" class="m-2 p-2 text-white bg-blue-600 rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300">
+                <i class="fa-solid fa-lg" [ngClass]="{'fa-bars': isMinimized, 'fa-angle-double-left': !isMinimized}"></i>
             </button>
             <!-- Buscador -->
             <div class="flex items-center w-full max-w-xs ml-4">

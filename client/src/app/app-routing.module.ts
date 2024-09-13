@@ -10,17 +10,14 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
-  {path: 'login', component:LoginComponent},
   {path: 'menu', component:MenuComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'doctor/perfil', component:PerfilComponent},
   {path: 'doctor/principal', component: PrincipalDoctorComponent},
   {path: 'doctor/citas-rechazadas', component: CitasRechazadasComponent},
   {path: 'doctor/agendar', component: AgendarComponent},
   {path: '**', component: PrincipalComponent}
 
-
-  
-  
 ];
 
 @NgModule({
