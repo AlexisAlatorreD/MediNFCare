@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -20,20 +20,11 @@ export interface Usuario {
 
 export class LoginService {
 
-  URL = 'http://127.0.0.1:8000/api/login';
-
-  reqHeader = new HttpHeaders({
-    'Authorization': 'Bearer '
-  });
-
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest'
-  });
+  URL = 'http://localhost/medinfcare/server/login';
 
   constructor(private http: HttpClient) { }
 
   AccessLogin(data: FormData): Observable<any> {  // Change to Usuario type
-    return this.http.post<any>(this.URL, data, { headers: this.reqHeader });
+    return this.http.post<any>(this.URL, data);
   }
 }

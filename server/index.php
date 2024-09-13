@@ -32,11 +32,11 @@ switch ($request_method) {
   case 'GET':
     if (strpos($request_uri, '/api/usuario') !== false) {
         include_once $baseDir . '/controller/usuario.php';
-      }else if (strpos($request_uri, '/api/login') !== false) {
+      }else if (strpos($request_uri, '/server/login') !== false) {
         include_once $baseDir . '/controller/login.php';
-      }else if (strpos($request_uri, '/api/inegi') !== false) {
+      }else if (strpos($request_uri, '/server/inegi') !== false) {
         include_once $baseDir . '/controller/inegi.php';
-      } elseif (strpos($request_uri, '/api/status') !== false) {
+      } elseif (strpos($request_uri, '/server/status') !== false) {
         header('Content-Type: application/json');
         echo json_encode(array("message" => "Servidor funcionando correctamente"));
       } else {

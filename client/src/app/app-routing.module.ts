@@ -10,16 +10,13 @@ import { HistorialComponent } from './doctor/historial/historial.component';
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
-  {path: 'login', component:LoginComponent},
   {path: 'menu', component:MenuComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'doctor/perfil', component:PerfilComponent},
   {path: 'doctor/principal', component: PrincipalDoctorComponent},
   {path: 'doctor/citas-rechazadas', component: CitasRechazadasComponent},
-  {path: 'doctor/notas', component: HistorialComponent},
+  {path: 'doctor/notas', component: HistorialComponent}
 
-
-  
-  
 ];
 
 @NgModule({
