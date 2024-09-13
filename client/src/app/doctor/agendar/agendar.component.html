@@ -1,0 +1,66 @@
+<div class="flex">
+    <app-menu></app-menu>
+    
+    <div class="flex-1 mt-4 transition-all duration-300">
+
+        <!--AQUI AGREGA TODA LA VISTA-->
+        <div class="container mx-auto mt-8 p-4 max-w-lg bg-white shadow-md rounded-lg mt-20">
+            <h2 class="text-2xl font-bold text-center mb-6">Agendar Cita</h2>
+          
+            <!-- Buscador de pacientes -->
+            <div class="mb-4">
+              <label for="paciente" class="block text-sm font-medium text-gray-700">Selecciona el Paciente:</label>
+              <input 
+                type="text" 
+                id="paciente" 
+                [(ngModel)]="searchTerm" 
+                (input)="filterPatients()" 
+                placeholder="Buscar paciente..." 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+              <ul *ngIf="filteredPatients.length > 0" class="bg-white border border-gray-300 rounded-md mt-2 max-h-40 overflow-auto">
+                <li 
+                  *ngFor="let patient of filteredPatients" 
+                  (click)="selectPatient(patient)" 
+                  class="cursor-pointer p-2 hover:bg-gray-100">
+                  {{ patient.name }}
+                </li>
+              </ul>
+            </div>
+          
+            <!-- Fecha de la Cita -->
+            <div class="mb-4">
+              <label for="date" class="block text-sm font-medium text-gray-700">Fecha de la Cita:</label>
+              <input type="date" id="date" [(ngModel)]="appointmentDate" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+          
+            <!-- Hora de la Cita -->
+            <div class="mb-4">
+              <label for="time" class="block text-sm font-medium text-gray-700">Hora de la Cita:</label>
+              <input type="time" id="time" [(ngModel)]="appointmentTime" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+          
+            <!-- Comentarios -->
+            <div class="mb-6">
+              <label for="comments" class="block text-sm font-medium text-gray-700">Comentarios:</label>
+              <textarea id="comments" [(ngModel)]="comments" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" rows="4" placeholder="Detalles adicionales sobre tu cita..."></textarea>
+            </div>
+          
+            <!-- Botón para agendar la cita -->
+            <div class="flex justify-center">
+              <button (click)="scheduleAppointment()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Agendar Cita
+              </button>
+            </div>
+          
+            <!-- Mensaje de confirmación -->
+            <div *ngIf="appointmentScheduled" class="mt-4 text-green-500 text-center">
+              ¡Cita agendada para el {{ appointmentDate }} a las {{ appointmentTime }} con éxito para el paciente {{ selectedPatient?.name }}!
+            </div>
+          </div>
+          
+  
+          
+    </div>
+    
+</div>

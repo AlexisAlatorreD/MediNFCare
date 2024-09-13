@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';  
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 
 //Componentes
 import { PrincipalComponent } from './principal/principal.component';
@@ -17,6 +18,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PerfilComponent } from './doctor/perfil/perfil.component';
 import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
 import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
+import { AgendarComponent } from './doctor/agendar/agendar.component';
 
 
 @NgModule({
@@ -28,12 +30,14 @@ import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechaz
     MenuComponent,
     PerfilComponent,
     PrincipalDoctorComponent,
-    CitasRechazadasComponent
+    CitasRechazadasComponent,
+    AgendarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule   
+    ReactiveFormsModule,
+    FormsModule // Asegúrate de importar FormsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
