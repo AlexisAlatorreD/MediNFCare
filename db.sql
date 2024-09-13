@@ -138,6 +138,8 @@ id SERIAL PRIMARY KEY,
     id_municipio FOREIGN KEY REFERENCES municipio(id)
 );
 
+--Asistencia de citas
+
 CREATE OR REPLACE FUNCTION audit_func()
 RETURNS TRIGGER AS $$
 DECLARE
