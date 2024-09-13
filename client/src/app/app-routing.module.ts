@@ -7,7 +7,7 @@ import { PerfilComponent } from './doctor/perfil/perfil.component';
 import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
 import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
 import { AgendarComponent } from './doctor/agendar/agendar.component';
-import { HistorialComponent } from './doctor/historial/historial.component';
+import { ConsultaComponent } from './doctor/consulta/consulta.component';
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'doctor/principal', component: PrincipalDoctorComponent},
   {path: 'doctor/citas-rechazadas', component: CitasRechazadasComponent},
   {path: 'doctor/agendar', component: AgendarComponent},
-  {path: 'doctor/notas', component: HistorialComponent},
+  {path: 'doctor/consulta', component: ConsultaComponent},
   {path: '**', component: PrincipalComponent}
 
 ];

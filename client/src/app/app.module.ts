@@ -11,8 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegistrarComponent } from './admin/registrar/registrar.component';
-import { HistorialComponent } from './doctor/historial/historial.component';
-
 
 
 
@@ -21,6 +19,7 @@ import { PerfilComponent } from './doctor/perfil/perfil.component';
 import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
 import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
 import { AgendarComponent } from './doctor/agendar/agendar.component';
+import { ConsultaComponent } from './doctor/consulta/consulta.component';
 
 
 @NgModule({
@@ -33,8 +32,8 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
     PerfilComponent,
     PrincipalDoctorComponent,
     CitasRechazadasComponent,
-    HistorialComponent,
-    AgendarComponent
+    AgendarComponent,
+    ConsultaComponent
   ],
   imports: [
     BrowserModule,
