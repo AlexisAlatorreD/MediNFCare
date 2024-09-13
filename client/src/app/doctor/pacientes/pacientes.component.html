@@ -1,0 +1,213 @@
+<div class="flex">
+    <app-menu></app-menu>
+  
+    <div class="flex-1 mt-4 transition-all duration-300">
+      <!-- Vista principal de pacientes -->
+      <div class="px-5">
+        <!-- Contenedor de búsqueda y botón -->
+        <div class="flex justify-between items-center mt-20">
+          <div class="flex flex-1 space-x-2">
+            <input 
+              type="text" 
+              placeholder="Buscar paciente..." 
+              class="flex-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              [(ngModel)]="searchTerm"
+            >
+            <button 
+              (click)="openModal()" 
+              class="px-4 py-2 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              Añadir Paciente
+            </button>
+          </div>
+        </div>
+  
+        <!-- Tabla de pacientes -->
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg mt-5">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edad</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Género</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm font-medium text-gray-900">Yahir</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-500">20</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-500">Hombre</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-500">xxyahir17</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Editar</a>
+                      <a href="#" class="ml-4 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700">Ver</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+        </div>
+      </div>
+  
+      <!-- Modal para añadir paciente -->
+      <div *ngIf="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white p-4 rounded-lg shadow-lg max-w-4xl w-full h-auto relative overflow-auto">
+          <button (click)="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h2 class="text-xl font-bold text-gray-900 mb-3">Añadir Paciente</h2>
+          <form (ngSubmit)="addPatient()" class="grid grid-cols-2 gap-4">
+            <!-- Nombre -->
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+              <input 
+                type="text" 
+                id="name" 
+                [(ngModel)]="newPatient.name" 
+                name="name" 
+                required 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+              >
+            </div>
+            
+            <!-- Apellido -->
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-gray-700">Apellido:</label>
+              <input 
+                type="text" 
+                id="lastName" 
+                [(ngModel)]="newPatient.lastName" 
+                name="lastName" 
+                required 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+            </div>
+      
+            <!-- Teléfono -->
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono:</label>
+              <input 
+                type="text" 
+                id="phone" 
+                [(ngModel)]="newPatient.phone" 
+                name="phone" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+            </div>
+      
+            <!-- Correo -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">Correo:</label>
+              <input 
+                type="email" 
+                id="email" 
+                [(ngModel)]="newPatient.email" 
+                name="email" 
+                required 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+            </div>
+      
+            <!-- Dirección -->
+            <div class="col-span-2">
+              <label for="address" class="block text-sm font-medium text-gray-700">Dirección:</label>
+              <textarea 
+                id="address" 
+                [(ngModel)]="newPatient.address" 
+                name="address" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              ></textarea>
+            </div>
+      
+            <!-- Fecha de nacimiento -->
+            <div>
+              <label for="birthDate" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento:</label>
+              <input 
+                type="date" 
+                id="birthDate" 
+                [(ngModel)]="newPatient.birthDate" 
+                name="birthDate" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+            </div>
+      
+            <!-- Género -->
+            <div>
+              <label for="gender" class="block text-sm font-medium text-gray-700">Género:</label>
+              <select 
+                id="gender" 
+                [(ngModel)]="newPatient.gender" 
+                name="gender" 
+                required 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+      
+            <!-- Contacto de emergencia -->
+            <div>
+              <label for="emergencyContact" class="block text-sm font-medium text-gray-700">Contacto de Emergencia:</label>
+              <input 
+                type="text" 
+                id="emergencyContact" 
+                [(ngModel)]="newPatient.emergencyContact" 
+                name="emergencyContact" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+            </div>
+      
+            <!-- Tipo de sangre -->
+            <div>
+              <label for="bloodType" class="block text-sm font-medium text-gray-700">Tipo de Sangre:</label>
+              <input 
+                type="text" 
+                id="bloodType" 
+                [(ngModel)]="newPatient.bloodType" 
+                name="bloodType" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+            </div>
+      
+            <!-- Alergias -->
+            <div class="col-span-2">
+              <label for="allergies" class="block text-sm font-medium text-gray-700">Alergias:</label>
+              <textarea 
+                id="allergies" 
+                [(ngModel)]="newPatient.allergies" 
+                name="allergies" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              ></textarea>
+            </div>
+      
+            <!-- Botón para agregar paciente -->
+            <div class="col-span-2 flex justify-center mt-4">
+              <button 
+                type="submit" 
+                class="px-4 py-2 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                Agregar Paciente
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
