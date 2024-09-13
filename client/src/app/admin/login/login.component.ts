@@ -7,9 +7,10 @@ import Hashids from 'hashids';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   private hashids = new Hashids('X9f2Kp7Lm3Qr8Zw5Yt6Vb1Nj4Hg', 40);
   LoginForm: FormGroup;
 
@@ -23,8 +24,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-      
+   
   }
+  
 
   onSubmitLogin() {
     const valores = this.LoginForm.value;
@@ -61,7 +63,6 @@ export class LoginComponent implements OnInit {
   
     this.LoginForm.reset();
   }
-  
-  
-  }
+
+}
 
