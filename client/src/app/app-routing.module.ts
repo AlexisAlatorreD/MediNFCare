@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'doctor/principal', component: PrincipalDoctorComponent},
   {path: 'doctor/citas-rechazadas', component: CitasRechazadasComponent},
   {path: 'doctor/agendar', component: AgendarComponent},
-  {path: 'doctor/historial', component: HistorialComponent},
+  {path: 'doctor/notas', component: HistorialComponent},
   {path: '**', component: PrincipalComponent}
 
 ];
