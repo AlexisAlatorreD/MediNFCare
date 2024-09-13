@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PerfilComponent } from './doctor/perfil/perfil.component';
 import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
 import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
+import { HistorialComponent } from './doctor/historial/historial.component';
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'doctor/perfil', component:PerfilComponent},
   {path: 'doctor/principal', component: PrincipalDoctorComponent},
   {path: 'doctor/citas-rechazadas', component: CitasRechazadasComponent},
+  {path: 'doctor/notas', component: HistorialComponent},
 
 
   

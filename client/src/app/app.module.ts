@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegistrarComponent } from './admin/registrar/registrar.component';
+import { HistorialComponent } from './doctor/historial/historial.component';
 
 
 
@@ -28,6 +29,7 @@ import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechaz
     MenuComponent,
     PerfilComponent,
     PrincipalDoctorComponent,
+    HistorialComponent,
     CitasRechazadasComponent
   ],
   imports: [
