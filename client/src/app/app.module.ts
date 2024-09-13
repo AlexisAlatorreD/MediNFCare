@@ -16,7 +16,7 @@ import { RegistrarComponent } from './admin/registrar/registrar.component';
 import { MenuComponent } from './menu/menu.component';
 import { PerfilComponent } from './doctor/perfil/perfil.component';
 import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
-import { HistorialComponent } from './doctor/historial/historial.component';
+import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { HistorialComponent } from './doctor/historial/historial.component';
     MenuComponent,
     PerfilComponent,
     PrincipalDoctorComponent,
-    HistorialComponent
+    CitasRechazadasComponent
   ],
   imports: [
     BrowserModule,
