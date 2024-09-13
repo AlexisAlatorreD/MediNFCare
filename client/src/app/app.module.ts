@@ -21,6 +21,7 @@ import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechaz
 import { AgendarComponent } from './doctor/agendar/agendar.component';
 import { ConsultaComponent } from './doctor/consulta/consulta.component';
 import { PacientesComponent } from './doctor/pacientes/pacientes.component';
+import { HistorialPacienteComponent } from './doctor/historial-paciente/historial-paciente.component';
 
 
 
@@ -37,7 +38,8 @@ import { PacientesComponent } from './doctor/pacientes/pacientes.component';
     AgendarComponent,
     ConsultaComponent,
     AgendarComponent,
-    PacientesComponent
+    PacientesComponent,
+    HistorialPacienteComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
 import { PacientesComponent } from './doctor/pacientes/pacientes.component';
 import { RegistrarComponent } from './admin/registrar/registrar.component';
 import { ConsultaComponent } from './doctor/consulta/consulta.component';
+import { HistorialPacienteComponent } from './doctor/historial-paciente/historial-paciente.component';
+
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
@@ -22,8 +24,10 @@ const routes: Routes = [
   {path: 'doctor/consulta', component: ConsultaComponent},
   {path: 'doctor/pacientes', component: PacientesComponent},
   {path:'registrar', component: RegistrarComponent},
-  {path: '', redirectTo: '/inicio', pathMatch: 'full'},
-  {path: '**', redirectTo: '/inicio', pathMatch: 'full'},
+  {path: 'doctor/historial-paciente', component: HistorialPacienteComponent},
+  //redirecciones por defecto
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: '**', redirectTo: '/login', pathMatch: 'full'},
   {path: '**', component: PrincipalComponent}
 
 ];
