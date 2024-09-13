@@ -33,6 +33,7 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
     PerfilComponent,
     PrincipalDoctorComponent,
     CitasRechazadasComponent,
+    HistorialComponent,
     AgendarComponent
   ],
   imports: [
