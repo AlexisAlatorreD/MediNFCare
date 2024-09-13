@@ -23,6 +23,7 @@ import { ConsultaComponent } from './doctor/consulta/consulta.component';
 import { PacientesComponent } from './doctor/pacientes/pacientes.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +35,7 @@ import { PacientesComponent } from './doctor/pacientes/pacientes.component';
     PrincipalDoctorComponent,
     CitasRechazadasComponent,
     AgendarComponent,
-    ConsultaComponent
-    HistorialComponent,
+    ConsultaComponent,
     AgendarComponent,
     PacientesComponent
   ],
