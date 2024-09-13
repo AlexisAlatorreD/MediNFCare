@@ -21,6 +21,7 @@ import { PerfilComponent } from './doctor/perfil/perfil.component';
 import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-doctor.component';
 import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
 import { AgendarComponent } from './doctor/agendar/agendar.component';
+import { PacientesComponent } from './doctor/pacientes/pacientes.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
     PrincipalDoctorComponent,
     CitasRechazadasComponent,
     HistorialComponent,
-    AgendarComponent
+    AgendarComponent,
+    PacientesComponent
   ],
   imports: [
     BrowserModule,

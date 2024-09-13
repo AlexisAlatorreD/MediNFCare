@@ -8,6 +8,8 @@ import { PrincipalDoctorComponent } from './doctor/principal-doctor/principal-do
 import { CitasRechazadasComponent } from './doctor/citas-rechazadas/citas-rechazadas.component';
 import { AgendarComponent } from './doctor/agendar/agendar.component';
 import { HistorialComponent } from './doctor/historial/historial.component';
+import { PacientesComponent } from './doctor/pacientes/pacientes.component';
+import { RegistrarComponent } from './admin/registrar/registrar.component';
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
@@ -18,6 +20,10 @@ const routes: Routes = [
   {path: 'doctor/citas-rechazadas', component: CitasRechazadasComponent},
   {path: 'doctor/agendar', component: AgendarComponent},
   {path: 'doctor/notas', component: HistorialComponent},
+  {path: 'doctor/pacientes', component: PacientesComponent},
+  {path:'registrar', component: RegistrarComponent},
+  {path: '', redirectTo: '/inicio', pathMatch: 'full'},
+  {path: '**', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', component: PrincipalComponent}
 
 ];
