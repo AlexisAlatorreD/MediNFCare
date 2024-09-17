@@ -11,6 +11,7 @@ import { PacientesComponent } from './doctor/pacientes/pacientes.component';
 import { RegistrarComponent } from './admin/registrar/registrar.component';
 import { ConsultaComponent } from './doctor/consulta/consulta.component';
 import { HistorialPacienteComponent } from './doctor/historial-paciente/historial-paciente.component';
+import { DatosConsultaComponent } from './doctor/datos-consulta/datos-consulta.component';
 
 
 const routes: Routes = [
@@ -25,10 +26,13 @@ const routes: Routes = [
   {path: 'doctor/pacientes', component: PacientesComponent},
   {path:'registrar', component: RegistrarComponent},
   {path: 'doctor/historial-paciente', component: HistorialPacienteComponent},
+  {path: 'doctor/datos-consulta', component: DatosConsultaComponent},
+
   //redirecciones por defecto
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: '**', redirectTo: '/login', pathMatch: 'full'},
-  {path: '**', component: PrincipalComponent}
+  {path: '**', component: PrincipalComponent},
+
 
 ];
 

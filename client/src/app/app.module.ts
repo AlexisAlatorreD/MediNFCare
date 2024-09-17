@@ -22,6 +22,7 @@ import { AgendarComponent } from './doctor/agendar/agendar.component';
 import { ConsultaComponent } from './doctor/consulta/consulta.component';
 import { PacientesComponent } from './doctor/pacientes/pacientes.component';
 import { HistorialPacienteComponent } from './doctor/historial-paciente/historial-paciente.component';
+import { DatosConsultaComponent } from './doctor/datos-consulta/datos-consulta.component';
 
 
 
@@ -39,7 +40,8 @@ import { HistorialPacienteComponent } from './doctor/historial-paciente/historia
     ConsultaComponent,
     AgendarComponent,
     PacientesComponent,
-    HistorialPacienteComponent
+    HistorialPacienteComponent,
+    DatosConsultaComponent
   ],
   imports: [
     BrowserModule,
