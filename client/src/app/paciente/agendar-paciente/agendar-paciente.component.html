@@ -1,0 +1,57 @@
+<div class="flex">
+    <app-menu></app-menu>
+    
+    <div class="flex-1 mt-4 transition-all duration-300">
+
+        <!--AQUI AGREGA TODA LA VISTA-->
+        <div class="mt-8 p-4">
+            <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg space-y-6">
+                <h2 class="text-2xl font-semibold text-gray-700 text-center">Agendar Cita</h2>
+              
+                <!-- Formulario para agendar cita -->
+                <form class="space-y-6">
+                  <!-- Selección de Especialidad -->
+                  <div>
+                    <label for="especialidad" class="block text-sm font-medium text-gray-700">Especialidad</label>
+                    <select id="especialidad" name="especialidad" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                      <option disabled selected>Selecciona una especialidad</option>
+                      <option value="medicina-general">Medicina General</option>
+                      <option value="dermatologia">Dermatología</option>
+                      <option value="cardiologia">Cardiología</option>
+                      <option value="ginecologia">Ginecología</option>
+                      <option value="pediatria">Pediatría</option>
+                      <!-- Agrega más especialidades según sea necesario -->
+                    </select>
+                  </div>
+              
+                  <!-- Selección de Fecha -->
+                  <div>
+                    <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha de la cita</label>
+                    <input type="date" id="fecha" name="fecha" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                  </div>
+              
+                  <!-- Selección de Hora -->
+                  <div>
+                    <label for="hora" class="block text-sm font-medium text-gray-700">Hora de la cita</label>
+                    <input type="time" id="hora" name="hora" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                  </div>
+              
+                  <!-- Motivo de la consulta -->
+                  <div>
+                    <label for="motivo" class="block text-sm font-medium text-gray-700">Motivo de la consulta</label>
+                    <textarea id="motivo" name="motivo" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Describa el motivo de su consulta"></textarea>
+                  </div>
+              
+                  <!-- Botón para agendar la cita -->
+                  <div class="text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none">
+                      Agendar Cita
+                    </button>
+                  </div>
+                </form>
+              </div>
+              
+        </div>
+    </div>
+    
+</div>

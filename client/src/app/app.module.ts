@@ -26,6 +26,7 @@ import { DatosConsultaComponent } from './doctor/datos-consulta/datos-consulta.c
 import { PrincipalPacienteComponent } from './paciente/principal-paciente/principal-paciente.component';
 import { DatosPublicosComponent } from './paciente/datos-publicos/datos-publicos.component';
 import { VistaPublicoComponent } from './paciente/vista-publico/vista-publico.component';
+import { AgendarPacienteComponent } from './paciente/agendar-paciente/agendar-paciente.component';
 
 
 
@@ -47,7 +48,8 @@ import { VistaPublicoComponent } from './paciente/vista-publico/vista-publico.co
     DatosConsultaComponent,
     PrincipalPacienteComponent,
     DatosPublicosComponent,
-    VistaPublicoComponent
+    VistaPublicoComponent,
+    AgendarPacienteComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ import { DatosConsultaComponent } from './doctor/datos-consulta/datos-consulta.c
 import { PrincipalPacienteComponent } from './paciente/principal-paciente/principal-paciente.component';
 import { DatosPublicosComponent } from './paciente/datos-publicos/datos-publicos.component';
 import { VistaPublicoComponent } from './paciente/vista-publico/vista-publico.component';
+import { AgendarPacienteComponent } from './paciente/agendar-paciente/agendar-paciente.component';
 
 const routes: Routes = [
   {path: 'inicio', component:PrincipalComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'paciente/principal-paciente', component: PrincipalPacienteComponent},
   {path: 'paciente/datos-publicos', component: DatosPublicosComponent},
   {path: 'paciente/vista-publico', component: VistaPublicoComponent},
+  {path: 'paciente/agendar-paciente', component: AgendarPacienteComponent},
   // {path: '**', component: PageNotFoundComponent}, //pagina de error 404
 
   //redirecciones por defecto
