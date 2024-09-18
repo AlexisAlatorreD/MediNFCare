@@ -1,131 +1,120 @@
 <div class="flex h-screen">
     <!-- Sidebar principal -->
-    <div class="fixed top-0 left-0 h-screen bg-[#1b4f72]  border-blue-50 transition-all duration-300 shadow-lg z-20"
-        [ngClass]="{'w-64': !isMinimized, 'w-16': isMinimized}">
-        <!-- Logotipo (Aquí puedes poner la imagen) -->
-        <div class="flex justify-center items-center p-4">
-            <!-- Mostrar logo grande -->
-            <ng-container *ngIf="!isMinimized; else logoPequeno">
-              <img src="../assets/img/logo.png" width="120" height="120" alt="Logotipo" class="rounded-lg">
-            </ng-container>
-            <!-- Template del logo pequeño -->
-            <ng-template #logoPequeno>
-              <img src="../assets/img/logo.png" alt="Logo reducido" width="80" height="80" class="rounded-lg">
-            </ng-template>
-          </div>
-          
-
-        <!-- Menú de navegación -->
-        <nav class="mt-8">
-            <ul class="space-y-4">
-                <hr>         <!-- Menú de Doctor -->
-                <li>
-                    <a routerLink="/doctor/principal"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Inicio
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="/doctor/agendar"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-calendar-days fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Agendar
-                        </span>
-                    </a>
-                </li>   
-                <li>
-                    <a routerLink="/doctor/agendar"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-clipboard-user fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Agendar
-                        </span>
-                    </a>
-                </li>
-                <hr>         <!-- Menú de Paciente -->
-                <li>
-                    <a routerLink="/paciente/principal-paciente"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Inicio
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="/paciente/datos-publicos"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-book-medical fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Datos publicos
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="/paciente/agendar-paciente"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-calendar-days fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Agendar
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="/paciente/citas-paciente"
-                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
-                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
-                        <i class="fa-solid fa-clipboard-user fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Citas
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
+    <div class="fixed top-0 left-0 h-screen bg-[#1b4f72] border-blue-50 shadow-lg z-20 transition-all duration-300"
+         [ngClass]="{'w-64': !isMinimized && !isMobile, 'w-16': isMinimized && !isMobile, 'w-full': isMobile && isMenuOpen, 'hidden': isMobile && !isMenuOpen}">
+      <!-- Botón para cerrar el menú en dispositivos móviles -->
+      <div *ngIf="isMobile" class="flex justify-end p-2">
+        <button (click)="toggleMenu()" class="p-2 bg-white text-black rounded-md shadow-lg hover:bg-gray-300 transition-all duration-300">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      <!-- Logotipo (Aquí puedes poner la imagen) -->
+      <div class="flex justify-center items-center p-4">
+        <ng-container *ngIf="!isMinimized; else logoPequeno">
+          <img src="../assets/img/logo.png" width="120" height="120" alt="Logotipo" class="rounded-lg">
+        </ng-container>
+        <ng-template #logoPequeno>
+          <img src="../assets/img/logo.png" alt="Logo reducido" width="80" height="80" class="rounded-lg">
+        </ng-template>
+      </div>
+  
+      <!-- Menú de navegación -->
+      <nav class="mt-8">
+        <ul class="space-y-4">
+          <hr> <!-- Menú de Doctor -->
+          <li>
+            <a routerLink="/doctor/principal"
+               class="flex items-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+               [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+              <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
+              <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                Inicio
+              </span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/doctor/agendar"
+               class="flex items-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
+               [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+              <i class="fa-solid fa-calendar-days fa-xl" style="color: #74C0FC;"></i>
+              <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                Agendar
+              </span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/doctor/agendar"
+                class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
+                [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                <i class="fa-solid fa-clipboard-user fa-xl" style="color: #74C0FC;"></i>
+                <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                    Agendar
+                </span>
+            </a>
+        </li>
+        <hr>         <!-- Menú de Paciente -->
+        <li>
+            <a routerLink="/paciente/principal-paciente"
+                class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+                [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
+                <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                    Inicio
+                </span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/paciente/datos-publicos"
+                class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+                [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                <i class="fa-solid fa-book-medical fa-xl" style="color: #74C0FC;"></i>
+                <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                    Datos publicos
+                </span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</div>
+  
     <!-- Contenedor principal -->
     <div class="flex-1 flex flex-col">
-        <!-- Menú superior -->
-        <div class="fixed top-0 right-0  h-16 bg-[#85C1E9]  flex items-center justify-between px-4 shadow-md z-10 transition-all duration-300"
-            [ngClass]="{'left-64': !isMinimized, 'left-16': isMinimized}">
-            <button (click)="toggleSidebar()" class="m-2 p-2 text-white bg-blue-600 rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300">
-                <i class="fa-solid fa-lg" [ngClass]="{'fa-bars': isMinimized, 'fa-angle-double-left': !isMinimized}"></i>
-            </button>
-            <!-- Buscador -->
-            <div class="flex items-center w-full max-w-xs ml-4">
-                <input type="text" placeholder="Buscar..." class="w-full p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <!-- Botones de iconos -->
-            <div class="flex space-x-4">
-                <a routerLink="/doctor/perfil" ><button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
-                    <i class="fa-solid fa-user"></i>
-                </button></a>
-                <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
-                    <i class="fa-solid fa-cog"></i>
-                </button>
-                <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
-                    <i class="fa-solid fa-sign-out-alt"></i>
-                </button>
-            </div>
+      <!-- Menú superior -->
+      <div class="fixed top-0 right-0 h-16 bg-[#85C1E9] flex items-center justify-between px-4 shadow-md z-10 transition-all duration-300"
+           [ngClass]="{'left-64': !isMinimized && !isMobile, 'left-16': isMinimized && !isMobile, 'left-0': isMobile}">
+        <button (click)="toggleSidebar()" class="m-2 p-2 text-white bg-blue-600 rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300">
+          <i class="fa-solid fa-lg" [ngClass]="{'fa-bars': isMinimized || isMobile, 'fa-angle-double-left': !isMinimized && !isMobile}"></i>
+        </button>
+        <!-- Botón para abrir el menú en dispositivos móviles -->
+        <button *ngIf="isMobile" (click)="toggleMenu()" class="m-2 p-2 text-white bg-blue-600 rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+  
+        <!-- Buscador -->
+        <div class="flex items-center w-full max-w-xs ml-4">
+          <input type="text" placeholder="Buscar..." class="w-full p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
-
-        <!-- Contenido principal -->
-        <main class="flex-1 transition-all duration-300 mt-5" [ngClass]="{'ml-64': !isMinimized, 'ml-16': isMinimized}">
-            <!-- Aquí va el contenido dinámico -->
-        
-
-        </main>
+  
+        <!-- Botones de iconos -->
+        <div class="flex space-x-4">
+          <a routerLink="/doctor/perfil">
+            <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+              <i class="fa-solid fa-user"></i>
+            </button>
+          </a>
+          <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+            <i class="fa-solid fa-cog"></i>
+          </button>
+          <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+            <i class="fa-solid fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Contenido principal -->
+      <main class="flex-1 transition-all duration-300 mt-16" [ngClass]="{'ml-64': !isMinimized && !isMobile, 'ml-16': isMinimized && !isMobile, 'ml-0': isMobile}">
+        <!-- Aquí va el contenido dinámico -->
+      </main>
     </div>
-</div>
+  </div>
+  
