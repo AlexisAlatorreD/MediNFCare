@@ -1,0 +1,28 @@
+/* menu.component.css */
+
+/* Asegura que el enlace ocupe el espacio completo del contenedor y tenga suficiente altura */
+a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3rem; /* Ajusta la altura del elemento de menú */
+    padding: 0.5rem 1rem; /* Ajusta el padding para que el área de hover sea más grande */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+  }
+  
+  i {
+    min-width: 2rem; /* Asegura que el ícono tenga un ancho mínimo constante */
+    text-align: center; /* Centra el ícono dentro del enlace */
+  }
+  
+  span {
+    margin-left: 0.75rem; /* Ajusta el margen del texto respecto al ícono */
+  }
+
+  /* menu.component.css */
+
+
+  
+
+  
+  

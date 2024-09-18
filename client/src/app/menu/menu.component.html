@@ -24,17 +24,19 @@
           <hr> <!-- Menú de Doctor -->
           <li>
             <a routerLink="/doctor/principal"
-               class="flex items-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
-               [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+               class="flex items-center text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+               [ngClass]="{'w-full': isMinimized, 'w-auto': !isMinimized, 'justify-center': isMinimized, 'justify-start': !isMinimized}">
               <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
-              <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+              <span class="ml-3 text-md font-bold text-white"
+                    [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
                 Inicio
               </span>
             </a>
           </li>
+          
           <li>
             <a routerLink="/doctor/agendar"
-               class="flex items-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
+               class="flex items-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
                [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
               <i class="fa-solid fa-calendar-days fa-xl" style="color: #74C0FC;"></i>
               <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
@@ -44,7 +46,7 @@
           </li>
           <li>
             <a routerLink="/doctor/agendar"
-                class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
+                class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
                 [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
                 <i class="fa-solid fa-clipboard-user fa-xl" style="color: #74C0FC;"></i>
                 <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
