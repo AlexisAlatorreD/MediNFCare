@@ -160,7 +160,7 @@ id SERIAL PRIMARY KEY,
     id_municipio INT REFERENCES municipio(id)
 );
 
---Asistencia de citas
+/*Asistencia de citas
 
 CREATE OR REPLACE FUNCTION audit_func()
 RETURNS TRIGGER AS $$
@@ -235,6 +235,7 @@ CREATE TRIGGER enfermera_audit_trg
 AFTER INSERT OR UPDATE OR DELETE ON enfermera
 FOR EACH ROW EXECUTE FUNCTION audit_func('id');
 
+*/
 
 -- Permisos CRUD para diferentes funcionalidades
 INSERT INTO permiso (nombre_permiso, estado) VALUES ('Crear usuario', true);
@@ -283,7 +284,7 @@ INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 10); -- Leer cita
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (2, 11); -- Actualizar cita
 
 -- Asignación de permisos al rol de Enfermero (Puede crear, leer y actualizar pacientes, pero no eliminar)
-INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 5); -- Crear paciente
+INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 5); -- Crear paciente (un enfermero no da alta)
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 6); -- Leer paciente
 INSERT INTO rol_permiso (id_rol, id_permiso) VALUES (3, 7); -- Actualizar paciente
 

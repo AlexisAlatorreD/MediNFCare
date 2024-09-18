@@ -73,6 +73,26 @@
                 </span>
             </a>
         </li>
+        <li>
+            <a routerLink="/paciente/agendar-paciente"
+                class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+                [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                <i class="fa-solid fa-calendar-days fa-xl" style="color: #74C0FC;"></i>
+                <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                    Agendar
+                </span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/paciente/citas-paciente"
+                class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+                [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                <i class="fa-solid fa-clipboard-user fa-xl" style="color: #74C0FC;"></i>
+                <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                    Citas
+                </span>
+            </a>
+        </li>
     </ul>
 </nav>
 </div>

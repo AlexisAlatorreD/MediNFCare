@@ -18,23 +18,20 @@ $login = new Login($db);
 $request_method = $_SERVER["REQUEST_METHOD"];
 $data = json_decode(file_get_contents("php://input"));
 
-switch($request_method) {
+switch ($request_method) {
     case 'POST':
-        if (!empty($data->correo) && !empty($data->contrasena)) {
-            $login->correo = $data->correo;
+        if (!empty($data->usuario) && !empty($data->contrasena)) {
+            $login->usuario = $data->usuario;
             $login->contrasena = $data->contrasena;
-            $login->rol_id = isset($data->rol_id) ? $data->rol_id : null;
-            $login->departamento_id = isset($data->departamento_id) ? $data->departamento_id : null;
-            $login->token_recuperacion = isset($data->token_recuperacion) ? $data->token_recuperacion : null;
-            $login->fecha_expiracion_token = isset($data->fecha_expiracion_token) ? $data->fecha_expiracion_token : null;
-            $login->activo = isset($data->activo) ? $data->activo : true;
-
-            if ($login->create()) {
-                http_response_code(201);
-                echo json_encode(array("message" => "Usuario creado correctamente."));
+    
+            $result = $login->login();
+            
+            if ($result) {
+                http_response_code(200);
+                echo json_encode(array("message" => "Sesión iniciada", "token" => $result));
             } else {
-                http_response_code(503);
-                echo json_encode(array("message" => "No se pudo crear el usuario."));
+                http_response_code(401);
+                echo json_encode(array("message" => "Credenciales incorrectas."));
             }
         } else {
             http_response_code(400);
@@ -44,16 +41,15 @@ switch($request_method) {
 
     case 'GET':
         if (isset($_GET['id'])) {
-            $usuario->id = $_GET['id'];
-            
-        }else{
+            // Lógica para manejar solicitudes GET con ID
+        } else {
             echo json_encode(array("message" => "FUNCIONANDO"));
         }
         break;
 
     case 'PUT':
         if (!empty($data->id)) {
-            
+            // Lógica para manejar solicitudes PUT con ID
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "Datos incompletos."));
