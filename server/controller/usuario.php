@@ -19,33 +19,47 @@ $request_method = $_SERVER["REQUEST_METHOD"];
 $data = json_decode(file_get_contents("php://input"));
 
 // Definimos los campos requeridos
-$required_fields = ['nombres', 'primer_apellido', 'segundo_apellido', 'telefono', 'correo', 'direccion', 'fecha_nacimiento', 'estado', 'genero'];
+$required_fields = ['nombres', 'primer_apellido', 'segundo_apellido', 'telefono', 'correo', 'direccion', 'fecha_nacimiento', 'estado', 'genero', 'usuario', 'contrasena', 'id_rol'];
 
-switch($request_method) {
+switch ($request_method) {
     case 'POST':
         // Comprobamos que los campos requeridos no estén vacíos
-        $missing_fields = array_filter($required_fields, function($field) use ($data) {
+        $missing_fields = array_filter($required_fields, function ($field) use ($data) {
             return empty($data->$field);
         });
 
         if (empty($missing_fields)) {
-            // Asignamos los valores del cuerpo de la solicitud
+            // TABLA PERSONA
             $login->nombres = $data->nombres;
             $login->primer_apellido = $data->primer_apellido;
             $login->segundo_apellido = isset($data->segundo_apellido) ? $data->segundo_apellido : null;
             $login->telefono = $data->telefono;
+            $login->correo = $data->correo;
             $login->direccion = $data->direccion;
             $login->fecha_nacimiento = $data->fecha_nacimiento;
             $login->genero = $data->genero;
             $login->estado = isset($data->estado) ? $data->estado : 1; // Por defecto, activo
+            
+            //TABLA USUARIO
+            $login->usuario = $data->usuario;
+            $login->contrasena = $data->contrasena;
+            $login->id_rol = $data->id_rol;
 
-            if ($login->create()) {
-                http_response_code(201);
-                echo json_encode(array("message" => "Usuario creado correctamente."));
+            if ($id = $login->create()) {
+                $login->id_persona = $id; // Ya tenemos el ID insertado
+                if ($login->createUser()) {
+                    http_response_code(200);
+                    echo json_encode(array(
+                        "message" => "Usuario creado correctamente.",
+                    ));
+                } else {
+                    http_response_code(401);
+                    echo json_encode(array("message" => "No se pudo crear el usuario."));
+                }
             } else {
-                http_response_code(503);
-                echo json_encode(array("message" => "No se pudo crear el usuario."));
-            }
+                http_response_code(400);
+                echo json_encode(array("message" => "No se pudo crear la persona."));
+            }            
         } else {
             // Faltan campos, devolvemos un error
             http_response_code(400);
@@ -59,15 +73,13 @@ switch($request_method) {
     case 'GET':
         if (isset($_GET['id'])) {
             $usuario->id = $_GET['id'];
-            
-        }else{
+        } else {
             echo json_encode(array("message" => "FUNCIONANDO"));
         }
         break;
 
     case 'PUT':
         if (!empty($data->id)) {
-            
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "Datos incompletos."));
@@ -88,4 +100,3 @@ switch($request_method) {
         echo json_encode(array("message" => "Método no permitido."));
         break;
 }
-?>
