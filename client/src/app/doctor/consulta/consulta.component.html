@@ -4,79 +4,69 @@
     <div class="flex-1 mt-20 transition-all duration-300">
         <div class="container mx-auto relative">
         
+            <form class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg space-y-6">
+                <h2 class="text-xl font-semibold text-gray-700">Formulario de Consulta</h2>
+              
+                <!-- Nombre Completo -->
+                <div>
+                  <label for="nombreCompleto" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+                  <input type="text" id="nombreCompleto" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+              
+                <!-- Edad -->
+                <div>
+                  <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
+                  <input type="number" id="edad" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+              
+                <!-- Peso -->
+                <div>
+                  <label for="peso" class="block text-sm font-medium text-gray-700">Peso (kg)</label>
+                  <input type="number" id="peso" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+              
+                <!-- Género -->
+                <div>
+                  <label for="genero" class="block text-sm font-medium text-gray-700">Género</label>
+                  <select id="genero" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+              
+                <!-- Síntomas -->
+                <div>
+                  <label for="sintomas" class="block text-sm font-medium text-gray-700">Síntomas</label>
+                  <textarea id="sintomas" rows="4" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+                </div>
+              
+                <!-- Medicamentos Recetados -->
+                <div>
+                  <label for="medicamentos" class="block text-sm font-medium text-gray-700">Medicamentos Recetados y Dosis</label>
+                  <textarea id="medicamentos" rows="4" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Ejemplo: 1 pastilla cada 8 horas por 1 semana" required></textarea>
+                </div>
+              
+                <!-- Posible Enfermedad -->
+                <div>
+                  <label for="posibleEnfermedad" class="block text-sm font-medium text-gray-700">Posible Enfermedad</label>
+                  <input type="text" id="posibleEnfermedad" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+              
+                <!-- Estudios Requeridos -->
+                <div>
+                  <label for="estudios" class="block text-sm font-medium text-gray-700">Estudios Requeridos</label>
+                  <textarea id="estudios" rows="3" class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Ejemplo: Análisis de sangre, radiografía, etc." required></textarea>
+                </div>
+              
+                <!-- Botones -->
+                <div class="flex justify-end space-x-4">
+                  <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600">Rechazar</button>
+                  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600">Aceptar y Guardar</button>
+                </div>
+              </form>
+              
 
-            <h2 class="text-3xl font-bold text-center text-blue-800 ">Formulario de Consulta</h2>
-
-            <div class="bg-white p-6 rounded-lg shadow-xl max-w-4xl mx-auto">
-
-                <form>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
-                        <div class="form-group">
-                            <label for="nombre" class="block text-blue-700 font-semibold">Nombre Completo</label>
-                            <input type="text" id="nombre" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe el nombre del paciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="edad" class="block text-blue-700 font-semibold">Edad</label>
-                            <input type="number" id="edad" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe la edad del paciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="genero" class="block text-blue-700 font-semibold">Género</label>
-                            <select id="genero" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg">
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="peso" class="block text-blue-700 font-semibold">Peso (kg)</label>
-                            <input type="number" id="peso" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe el peso del paciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="presion-arterial" class="block text-blue-700 font-semibold">Presión Arterial (mmHg)</label>
-                            <input type="text" id="presion-arterial" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Ejemplo: 120/80">
-                        </div>
-                        <div class="form-group">
-                            <label for="frecuencia-cardiaca" class="block text-blue-700 font-semibold">Frecuencia Cardíaca (lpm)</label>
-                            <input type="number" id="frecuencia-cardiaca" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe la frecuencia cardíaca del paciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="frecuencia-respiratoria" class="block text-blue-700 font-semibold">Frecuencia Respiratoria (rpm)</label>
-                            <input type="number" id="frecuencia-respiratoria" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe la frecuencia respiratoria del paciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="diagnostico" class="block text-blue-700 font-semibold">Diagnóstico</label>
-                            <input type="text" id="diagnostico" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe el diagnóstico del paciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="tratamiento" class="block text-blue-700 font-semibold">Tratamiento</label>
-                            <input type="text" id="tratamiento" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe el tratamiento indicado">
-                        </div>
-                        <div class="form-group">
-                            <label for="alergias" class="block text-blue-700 font-semibold">Alergias</label>
-                            <input type="text" id="alergias" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" placeholder="Escribe si el paciente tiene alergias">
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha-visita" class="block text-blue-700 font-semibold">Fecha de Última Visita</label>
-                            <input type="date" id="fecha-visita" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg">
-                        </div>
-                        <div class="form-group">
-                            <label for="comentarios" class="block text-blue-700 font-semibold">Comentarios</label>
-                            <textarea id="comentarios" class="form-control w-full mt-2 p-2 border border-blue-300 rounded-lg" rows="4" placeholder="Comentarios adicionales"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 text-center">
-                        <button class="flex  text-blue-700 hover:text-blue-900" >
-                            <i class="fas fa-info-circle text-2xl"></i>
-                        </button>
-                        <button type="submit" class="bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800">
-                            <i class="fas fa-save"></i> Guardar
-                        </button>
-                    </div>
-                </form>
-                
-            </div>
         </div>
     </div>
 </div>

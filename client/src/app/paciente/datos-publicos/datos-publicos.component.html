@@ -1,0 +1,69 @@
+<div class="flex">
+    <app-menu></app-menu>
+    
+    <div class="flex-1 mt-4 transition-all duration-300">
+
+        <!--AQUI AGREGA TODA LA VISTA-->
+        <div class="mt-8 p-4">
+            <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg space-y-6 relative">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-2xl font-semibold text-gray-700">Datos del Paciente</h2>
+                  <!-- Botón Ver -->
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none">
+                    Ver
+                  </button>
+                </div>
+              
+                <!-- Enfermedades -->
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h3 class="text-lg font-medium text-gray-600">Enfermedades</h3>
+                    <p *ngIf="mostrarEnfermedades" class="text-gray-700">[Lista de enfermedades del paciente]</p>
+                    <p *ngIf="!mostrarEnfermedades" class="text-gray-700">Oculto</p>
+                  </div>
+                  <button (click)="toggleEnfermedades()" class="text-gray-600">
+                    <i class="fa-solid" [ngClass]="{'fa-eye': mostrarEnfermedades, 'fa-eye-slash': !mostrarEnfermedades}"></i>
+                  </button>
+                </div>
+              
+                <!-- Alergias -->
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h3 class="text-lg font-medium text-gray-600">Alergias</h3>
+                    <p *ngIf="mostrarAlergias" class="text-gray-700">[Lista de alergias del paciente]</p>
+                    <p *ngIf="!mostrarAlergias" class="text-gray-700">Oculto</p>
+                  </div>
+                  <button (click)="toggleAlergias()" class="text-gray-600">
+                    <i class="fa-solid" [ngClass]="{'fa-eye': mostrarAlergias, 'fa-eye-slash': !mostrarAlergias}"></i>
+                  </button>
+                </div>
+              
+                <!-- Tipo de Sangre -->
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h3 class="text-lg font-medium text-gray-600">Tipo de Sangre</h3>
+                    <p *ngIf="mostrarTipoSangre" class="text-gray-700">[Tipo de sangre del paciente]</p>
+                    <p *ngIf="!mostrarTipoSangre" class="text-gray-700">Oculto</p>
+                  </div>
+                  <button (click)="toggleTipoSangre()" class="text-gray-600">
+                    <i class="fa-solid" [ngClass]="{'fa-eye': mostrarTipoSangre, 'fa-eye-slash': !mostrarTipoSangre}"></i>
+                  </button>
+                </div>
+              
+                <!-- Datos Adicionales -->
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h3 class="text-lg font-medium text-gray-600">Datos Adicionales</h3>
+                    <p *ngIf="mostrarDatosAdicionales" class="text-gray-700">[Datos adicionales del paciente]</p>
+                    <p *ngIf="!mostrarDatosAdicionales" class="text-gray-700">Oculto</p>
+                  </div>
+                  <button (click)="toggleDatosAdicionales()" class="text-gray-600">
+                    <i class="fa-solid" [ngClass]="{'fa-eye': mostrarDatosAdicionales, 'fa-eye-slash': !mostrarDatosAdicionales}"></i>
+                  </button>
+                </div>
+              </div>
+              
+        </div>
+    </div>
+    
+</div>

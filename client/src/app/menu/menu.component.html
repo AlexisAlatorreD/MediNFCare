@@ -18,6 +18,7 @@
         <!-- Menú de navegación -->
         <nav class="mt-8">
             <ul class="space-y-4">
+                <hr>         <!-- Menú de Doctor -->
                 <li>
                     <a routerLink="/doctor/principal"
                         class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
@@ -37,14 +38,35 @@
                             Agendar
                         </span>
                     </a>
-                </li>
+                </li>   
                 <li>
-                    <a routerLink="/doctor/pacientes"
+                    <a routerLink="/doctor/agendar"
                         class="flex items-center justify-center p-2 text-gray-700 hover:bg-blue-300 rounded-md transition-colors duration-200"
                         [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
                         <i class="fa-solid fa-clipboard-user fa-xl" style="color: #74C0FC;"></i>
                         <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
-                            Agregar paciente
+                            Agendar
+                        </span>
+                    </a>
+                </li>
+                <hr>         <!-- Menú de Paciente -->
+                <li>
+                    <a routerLink="/paciente/principal-paciente"
+                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                        <i class="fa-solid fa-house fa-xl" style="color: #74C0FC;"></i>
+                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                            Inicio
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/paciente/datos-publicos"
+                        class="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-800 rounded-md transition-colors duration-200"
+                        [ngClass]="{'justify-start': !isMinimized, 'justify-center': isMinimized}">
+                        <i class="fa-solid fa-book-medical fa-xl" style="color: #74C0FC;"></i>
+                        <span class="ml-3 text-md font-bold text-white" [ngClass]="{'hidden': isMinimized, 'block': !isMinimized}">
+                            Datos publicos
                         </span>
                     </a>
                 </li>
