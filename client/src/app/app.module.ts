@@ -25,6 +25,7 @@ import { HistorialPacienteComponent } from './doctor/historial-paciente/historia
 import { DatosConsultaComponent } from './doctor/datos-consulta/datos-consulta.component';
 import { PrincipalPacienteComponent } from './paciente/principal-paciente/principal-paciente.component';
 import { DatosPublicosComponent } from './paciente/datos-publicos/datos-publicos.component';
+import { VistaPublicoComponent } from './paciente/vista-publico/vista-publico.component';
 
 
 
@@ -45,7 +46,8 @@ import { DatosPublicosComponent } from './paciente/datos-publicos/datos-publicos
     HistorialPacienteComponent,
     DatosConsultaComponent,
     PrincipalPacienteComponent,
-    DatosPublicosComponent
+    DatosPublicosComponent,
+    VistaPublicoComponent
   ],
   imports: [
     BrowserModule,
