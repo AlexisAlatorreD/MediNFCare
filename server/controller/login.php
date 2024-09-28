@@ -26,9 +26,12 @@ switch ($request_method) {
     
             $result = $login->login();
             
-            if ($result) {
+            if ($result === 0) {
+                http_response_code(409);
+                echo json_encode(array("message" => "Ya hay una sesión activa"));
+            } elseif ($result) {
                 http_response_code(200);
-                echo json_encode(array("message" => "Sesión iniciada", "token" => $result));
+                echo json_encode(array("message" => "Sesión iniciada", "token" => $result["token"], "rol" => $result["rol"]));
             } else {
                 http_response_code(401);
                 echo json_encode(array("message" => "Credenciales incorrectas."));
@@ -38,7 +41,6 @@ switch ($request_method) {
             echo json_encode(array("message" => "Datos incompletos."));
         }
         break;
-
     case 'GET':
         if (isset($_GET['id'])) {
             // Lógica para manejar solicitudes GET con ID

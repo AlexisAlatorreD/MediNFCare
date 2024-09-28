@@ -30,7 +30,24 @@ $request_uri = $_SERVER['REQUEST_URI'];
 switch ($request_method) {
   case 'POST':
   case 'GET':
-    if (strpos($request_uri, '/server/usuario') !== false) {
+    /*if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+      $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+      $token = str_replace('Bearer ', '', $authHeader); // Remueve "Bearer " del token
+
+      if ($token === "03efc84253dc9d35c74351aa3d894d31") { // Aquí puedes verificar el token real
+        echo json_encode(['message' => 'Token válido, acceso permitido']);
+    } else {
+        http_response_code(401); // Acceso no autorizado
+        echo json_encode(['message' => 'Token inválido o expirado']);
+    }
+
+    } else {
+      header("HTTP/1.0 401 Unauthorized");
+      echo json_encode(array("message" => "Autenticación requerida"));
+      exit;
+     }*/
+    
+     if (strpos($request_uri, '/server/usuario') !== false) {
         include_once $baseDir . '/controller/usuario.php';
       }else if (strpos($request_uri, '/server/login') !== false) {
         include_once $baseDir . '/controller/login.php';
