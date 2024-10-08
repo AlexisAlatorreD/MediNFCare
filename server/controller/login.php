@@ -20,24 +20,34 @@ $data = json_decode(file_get_contents("php://input"));
 
 switch ($request_method) {
     case 'POST':
+        // Check if the user and password fields are not empty
         if (!empty($data->usuario) && !empty($data->contrasena)) {
             $login->usuario = $data->usuario;
             $login->contrasena = $data->contrasena;
     
             $result = $login->login();
             
+            
             if ($result === 0) {
-                http_response_code(409);
+                // If there's already an active session
+                http_response_code(409); // Conflict status
                 echo json_encode(array("message" => "Ya hay una sesión activa"));
             } elseif ($result) {
-                http_response_code(200);
-                echo json_encode(array("message" => "Sesión iniciada", "token" => $result["token"], "rol" => $result["rol"]));
+                // Successful login
+                http_response_code(200); // OK status
+                echo json_encode(array(
+                    "message" => "Sesión iniciada", 
+                    "token" => $result["token"], 
+                    "rol" => $result["rol"]
+                ));
             } else {
-                http_response_code(401);
+                // Incorrect credentials
+                http_response_code(401); // Unauthorized status
                 echo json_encode(array("message" => "Credenciales incorrectas."));
             }
         } else {
-            http_response_code(400);
+            // Missing fields
+            http_response_code(400); // Bad request status
             echo json_encode(array("message" => "Datos incompletos."));
         }
         break;
@@ -58,14 +68,33 @@ switch ($request_method) {
         }
         break;
 
-    case 'DELETE':
-        if (isset($_GET['id'])) {
-            echo json_encode(array("message" => "ID OBTENIDO"));
-        } else {
-            http_response_code(400);
-            echo json_encode(array("message" => "No se proporcionó el ID del usuario."));
-        }
-        break;
+        case 'DELETE':
+            if (isset($_GET['t'])) {
+                $token = $_GET['t'];
+        
+                if (!empty($token)) {
+                    $login->token = $token;
+        
+                    // Verificar el token en la base de datos
+                    if ($login->verifyToken()) {
+                        // Aquí puedes realizar la lógica para eliminar el token o cerrar sesión
+        
+                        http_response_code(200); // OK status
+                        echo json_encode(array("message" => "Token existente"));
+                    } else {
+                        http_response_code(403); // Forbidden status
+                        echo json_encode(array("message" => "Token inválido."));
+                    }
+                } else {
+                    http_response_code(400); // Bad Request status
+                    echo json_encode(array("message" => "No hay token proporcionado."));
+                }
+            } else {
+                http_response_code(400); // Bad Request status
+                echo json_encode(array("message" => "No se proporcionó el token del usuario."));
+            }
+            break;
+        
 
     default:
         http_response_code(405);

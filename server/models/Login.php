@@ -9,10 +9,39 @@ class Login {
     public $correo;
     public $contrasena;
     public $rol;
+    public $token;
 
     public function __construct($db) {
         $this->conn = $db;
     }
+
+// Verifica el token encriptado
+public function verifyToken() {
+    $query = "SELECT token, correo
+              FROM " . $this->table_token . "
+              WHERE correo = :correo";  // O puedes usar otro campo que sea relevante para buscar el token
+    
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":correo", $this->correo);  // Asegúrate de pasar el correo u otro identificador relevante
+    $stmt->execute();
+    
+    // Si el correo o identificador existe en la base de datos
+    if ($stmt->rowCount() > 0) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $hashedToken = $row['token'];  // El token almacenado encriptado
+
+        // Verifica que el token proporcionado coincida con el token encriptado en la base de datos
+        if (password_verify($this->token, $hashedToken)) {
+            return true; 
+        } else {
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
+
 
     // Verifica las credenciales
     public function verifyCredentials() {
@@ -89,8 +118,7 @@ class Login {
         return $stmt->execute();
     }
 
-    // Función principal de login
-    public function login() {
+    function login() {
         if ($this->verifyCredentials()) {
             if ($this->checkActiveSession()) {
                 return 0; // Ya hay una sesión activa

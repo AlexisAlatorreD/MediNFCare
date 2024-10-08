@@ -34,14 +34,32 @@ export class LoginService {
     });
   }*/
   
-  AccessLogin(data: any): Observable<any> {  // Change to Usuario type
-    return this.http.post<any>(this.URL, data).pipe(
-      catchError((error: HttpErrorResponse) => {
-        // Manejo del error aquí
-        return throwError(error.error || 'Error desconocido');
-      })
-    );
-  }
-
+    AccessLogin(data: any): Observable<any> {
+      return this.http.post<any>(this.URL, data).pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido';
+          let alertType = 'error';
+  
+          if (error.status === 401) {
+            errorMessage = 'Credenciales incorrectas.';
+            alertType = 'error';
+          } else if (error.status === 409) {
+            errorMessage = 'Ya hay una sesión activa.';
+            alertType = 'info';
+          } else if (error.status === 400) {
+            errorMessage = 'Datos incompletos.';
+            alertType = 'warning';
+          } else if (error.status === 500) {
+            errorMessage = 'Error del servidor.';
+            alertType = 'error';
+          }
+  
+          return throwError({ message: errorMessage, type: alertType }); // Devolver mensaje personalizado
+        })
+      );
+    }
  
+    clearSession(token: string): any {
+      return this.http.delete(this.URL+'?t='+token,)
+    }
 }
