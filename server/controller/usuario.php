@@ -13,73 +13,99 @@ include_once $root . '/models/Usuario.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$login = new Usuario($db);
+$usuario = new Usuario($db);
 
 $request_method = $_SERVER["REQUEST_METHOD"];
 $data = json_decode(file_get_contents("php://input"));
 
-// Definimos los campos requeridos
-$required_fields = ['nombres', 'primer_apellido', 'segundo_apellido', 'telefono', 'correo', 'direccion', 'fecha_nacimiento', 'estado', 'genero', 'usuario', 'contrasena', 'id_rol'];
-
-switch ($request_method) {
+switch($request_method) {
     case 'POST':
-        // Comprobamos que los campos requeridos no estén vacíos
-        $missing_fields = array_filter($required_fields, function ($field) use ($data) {
-            return empty($data->$field);
-        });
+        if (!empty($data->correo) && !empty($data->contrasena)) {
+            $usuario->correo = $data->correo;
+            $usuario->contrasena = $data->contrasena;
+            $usuario->rol_id = isset($data->rol_id) ? $data->rol_id : null;
+            $usuario->departamento_id = isset($data->departamento_id) ? $data->departamento_id : null;
+            $usuario->token_recuperacion = isset($data->token_recuperacion) ? $data->token_recuperacion : null;
+            $usuario->fecha_expiracion_token = isset($data->fecha_expiracion_token) ? $data->fecha_expiracion_token : null;
+            $usuario->activo = isset($data->activo) ? $data->activo : true;
 
-        if (empty($missing_fields)) {
-            // TABLA PERSONA
-            $login->nombres = $data->nombres;
-            $login->primer_apellido = $data->primer_apellido;
-            $login->segundo_apellido = isset($data->segundo_apellido) ? $data->segundo_apellido : null;
-            $login->telefono = $data->telefono;
-            $login->correo = $data->correo;
-            $login->direccion = $data->direccion;
-            $login->fecha_nacimiento = $data->fecha_nacimiento;
-            $login->genero = $data->genero;
-            $login->estado = isset($data->estado) ? $data->estado : 1; // Por defecto, activo
-            
-            //TABLA USUARIO
-            $login->usuario = $data->usuario;
-            $login->contrasena = $data->contrasena;
-            $login->id_rol = $data->id_rol;
-
-            if ($id = $login->create()) {
-                $login->id_persona = $id; // Ya tenemos el ID insertado
-                if ($login->createUser()) {
-                    http_response_code(200);
-                    echo json_encode(array(
-                        "message" => "Usuario creado correctamente.",
-                    ));
-                } else {
-                    http_response_code(401);
-                    echo json_encode(array("message" => "No se pudo crear el usuario."));
-                }
+            if ($usuario->create()) {
+                http_response_code(201);
+                echo json_encode(array("message" => "Usuario creado correctamente."));
             } else {
-                http_response_code(400);
-                echo json_encode(array("message" => "No se pudo crear la persona."));
-            }            
+                http_response_code(503);
+                echo json_encode(array("message" => "No se pudo crear el usuario."));
+            }
         } else {
-            // Faltan campos, devolvemos un error
             http_response_code(400);
-            echo json_encode(array(
-                "message" => "Datos incompletos.",
-                "missing_fields" => $missing_fields  // Indicamos los campos que faltan
-            ));
+            echo json_encode(array("message" => "Datos incompletos."));
         }
         break;
 
     case 'GET':
         if (isset($_GET['id'])) {
             $usuario->id = $_GET['id'];
+            $usuario->readOne();
+            if ($usuario->correo) {
+                echo json_encode(array(
+                    "id" => $usuario->id,
+                    "correo" => $usuario->correo,
+                    "rol_id" => $usuario->rol_id,
+                    "departamento_id" => $usuario->departamento_id,
+                    "token_recuperacion" => $usuario->token_recuperacion,
+                    "fecha_expiracion_token" => $usuario->fecha_expiracion_token,
+                    "activo" => $usuario->activo,
+                    "fecha_creacion" => $usuario->fecha_creacion
+                ));
+            } else {
+                http_response_code(404);
+                echo json_encode(array("message" => "Usuario no encontrado."));
+            }
         } else {
-            echo json_encode(array("message" => "FUNCIONANDO"));
+            $stmt = $usuario->readAll();
+            $num = $stmt->rowCount();
+
+            if ($num > 0) {
+                $usuarios_arr = array();
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    extract($row);
+                    $usuario_item = array(
+                        "id" => $id,
+                        "correo" => $correo,
+                        "rol_id" => $rol_id,
+                        "departamento_id" => $departamento_id,
+                        "token_recuperacion" => $token_recuperacion,
+                        "fecha_expiracion_token" => $fecha_expiracion_token,
+                        "activo" => $activo,
+                        "fecha_creacion" => $fecha_creacion
+                    );
+                    array_push($usuarios_arr, $usuario_item);
+                }
+                echo json_encode(array("records" => $usuarios_arr));
+            } else {
+                http_response_code(404);
+                echo json_encode(array("message" => "No se encontraron usuarios."));
+            }
         }
         break;
 
     case 'PUT':
         if (!empty($data->id)) {
+            $usuario->id = $data->id;
+            $usuario->correo = $data->correo;
+            $usuario->rol_id = $data->rol_id;
+            $usuario->departamento_id = $data->departamento_id;
+            $usuario->token_recuperacion = $data->token_recuperacion;
+            $usuario->fecha_expiracion_token = $data->fecha_expiracion_token;
+            $usuario->activo = $data->activo;
+
+            if ($usuario->update()) {
+                http_response_code(200);
+                echo json_encode(array("message" => "Usuario actualizado correctamente."));
+            } else {
+                http_response_code(503);
+                echo json_encode(array("message" => "No se pudo actualizar el usuario."));
+            }
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "Datos incompletos."));
@@ -88,7 +114,14 @@ switch ($request_method) {
 
     case 'DELETE':
         if (isset($_GET['id'])) {
-            echo json_encode(array("message" => "ID OBTENIDO"));
+            $usuario->id = $_GET['id'];
+            if ($usuario->delete()) {
+                http_response_code(200);
+                echo json_encode(array("message" => "Usuario eliminado correctamente."));
+            } else {
+                http_response_code(503);
+                echo json_encode(array("message" => "No se pudo eliminar el usuario."));
+            }
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "No se proporcionó el ID del usuario."));
@@ -100,3 +133,4 @@ switch ($request_method) {
         echo json_encode(array("message" => "Método no permitido."));
         break;
 }
+?>
