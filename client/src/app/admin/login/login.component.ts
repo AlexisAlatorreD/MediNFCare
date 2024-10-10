@@ -62,17 +62,12 @@ export class LoginComponent implements OnInit {
             const encryptedRol = this.encrypt(rolString);
             localStorage.setItem('rol', encryptedRol);
   
-            // Encriptar y almacenar el departamento
-            const deptoString = res.usuario.departamento_id.toString();
-            const encryptedDepartamento = this.encrypt(deptoString);
-            localStorage.setItem('depa', encryptedDepartamento);
-  
             this.showToast('success', 'Bienvenido Admin');
             setInterval(()=>{
               window.location.href = "/admin/principal_admin";
             },2000)
           } else {
-            //console.error('La respuesta del servidor no tiene la estructura esperada');
+            console.log('La respuesta del servidor no tiene la estructura esperada');
           }
         },
         err => {

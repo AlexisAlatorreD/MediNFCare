@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsuarioService, Usuario } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-registrar',
@@ -9,13 +10,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegistrarComponent implements OnInit {
   registroForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private srvUsuario: UsuarioService) {
     this.registroForm = this.fb.group({
       nombres: ['', Validators.required],
       primer_apellido: ['', Validators.required],
       segundo_apellido: ['', Validators.required],
       telefono: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      correo: ['', Validators.required],
       direccion: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
       genero: ['', Validators.required],
@@ -26,13 +27,19 @@ export class RegistrarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  onSubmit(): void {
-    if (this.registroForm.valid) {
-      console.log(this.registroForm.value);
+  onSubmit() {
+      const formData: Usuario = this.registroForm.value;
+      console.log(formData);
       // Aquí puedes agregar la lógica para enviar los datos del formulario.
+    this.srvUsuario.crearUsuario(formData).subscribe(
+      res =>{
+        console.log("Usuario registrado");
+      },
+      err =>{
+        console.log("Hubo un error");
+      })
     }
-  }
 }

@@ -2,11 +2,20 @@
 class Usuario {
     private $conn;
     private $table_name = "Usuario";
+    private $table_persona = "Persona";
     private $table_token = "token_sesion";
 
     public $id;
-    public $usuario;
+    public $nombres; // Agregado
+    public $primer_apellido; // Agregado
+    public $segundo_apellido; // Agregado
+    public $telefono; // Agregado
     public $correo;
+    public $direccion; // Agregado
+    public $fecha_nacimiento; // Agregado
+    public $genero; // Agregado
+    public $estado; // Agregado
+    public $usuario;
     public $contrasena;
     public $rol_id;
     public $departamento_id;
@@ -23,44 +32,62 @@ class Usuario {
 
     // Crear nuevo usuario
     function create() {
-        $query = "INSERT INTO " . $this->table_name . " 
-                    (correo, contrasena, rol_id, departamento_id, token_recuperacion, fecha_expiracion_token, activo) 
+        // Consulta SQL para insertar un nuevo usuario
+        $query = "INSERT INTO " . $this->table_persona . " 
+                    (nombres, primer_apellido, segundo_apellido, telefono, correo, direccion, 
+                    fecha_nacimiento, genero, estado) 
                   VALUES 
-                    (:correo, :contrasena, :rol_id, :departamento_id, :token_recuperacion, :fecha_expiracion_token, :activo)";
+                    (:nombres, :primer_apellido, :segundo_apellido, :telefono, :correo, :direccion, 
+                    :fecha_nacimiento, :genero, :estado)";
         $stmt = $this->conn->prepare($query);
-
+    
         // Sanitizar datos
+        $this->nombres = htmlspecialchars(strip_tags($this->nombres));
+        $this->primer_apellido = htmlspecialchars(strip_tags($this->primer_apellido));
+        $this->segundo_apellido = htmlspecialchars(strip_tags($this->segundo_apellido));
+        $this->telefono = htmlspecialchars(strip_tags($this->telefono));
         $this->correo = htmlspecialchars(strip_tags($this->correo));
-        $this->contrasena = password_hash(htmlspecialchars(strip_tags($this->contrasena)), PASSWORD_DEFAULT);
-        $this->rol_id = htmlspecialchars(strip_tags($this->rol_id));
-        $this->departamento_id = htmlspecialchars(strip_tags($this->departamento_id));
-        $this->token_recuperacion = htmlspecialchars(strip_tags($this->token_recuperacion));
-        
-        // Manejo de fecha de expiración del token
-        if (empty($this->fecha_expiracion_token)) {
-            $this->fecha_expiracion_token = null;
-        } else {
-            $this->fecha_expiracion_token = date('Y-m-d H:i:s', strtotime($this->fecha_expiracion_token));
-        }
-        
-        $this->activo = htmlspecialchars(strip_tags($this->activo));
-
+        $this->direccion = htmlspecialchars(strip_tags($this->direccion));
+        $this->fecha_nacimiento = htmlspecialchars(strip_tags($this->fecha_nacimiento));
+        $this->genero = htmlspecialchars(strip_tags($this->genero));
+        $this->estado = htmlspecialchars(strip_tags($this->estado));
+    
         // Enlace de parámetros
+        $stmt->bindParam(":nombres", $this->nombres);
+        $stmt->bindParam(":primer_apellido", $this->primer_apellido);
+        $stmt->bindParam(":segundo_apellido", $this->segundo_apellido);
+        $stmt->bindParam(":telefono", $this->telefono);
         $stmt->bindParam(":correo", $this->correo);
-        $stmt->bindParam(":contrasena", $this->contrasena);
-        $stmt->bindParam(":rol_id", $this->rol_id);
-        $stmt->bindParam(":departamento_id", $this->departamento_id);
-        $stmt->bindParam(":token_recuperacion", $this->token_recuperacion);
-        $stmt->bindParam(":fecha_expiracion_token", $this->fecha_expiracion_token);
-        $stmt->bindParam(":activo", $this->activo);
-
+        $stmt->bindParam(":direccion", $this->direccion);
+        $stmt->bindParam(":fecha_nacimiento", $this->fecha_nacimiento);
+        $stmt->bindParam(":genero", $this->genero);
+        $stmt->bindParam(":estado", $this->estado);
+    
         // Ejecutar
         if ($stmt->execute()) {
+            $lastInsertedId = $this->conn->lastInsertId();
+
+        // Consulta SQL para insertar en la tabla usuario
+        $queryUsuario = "INSERT INTO usuario (usuario, contrasena, id_rol, id_persona, estado) 
+                         VALUES (:usuario, :contrasena, :id_rol, :id_persona, :estado)";
+
+        $stmtUsuario = $this->conn->prepare($queryUsuario);
+
+        // Enlace de parámetros para usuario
+        $stmtUsuario->bindParam(":usuario", $this->usuario);
+        $stmtUsuario->bindParam(":contrasena", $this->contrasena); // Ya está hasheada
+        $stmtUsuario->bindParam(":id_rol", $this->rol_id);
+        $stmtUsuario->bindParam(":id_persona", $lastInsertedId); // Usar el ID de persona
+        $stmtUsuario->bindParam(":estado", $this->estado);
+
+        // Ejecutar inserción en la tabla usuario
+        if ($stmtUsuario->execute()) {
             return true;
         }
-
+        }
+    
         return false;
-    }
+    }    
 
     // Leer todos los usuarios
     function readAll() {

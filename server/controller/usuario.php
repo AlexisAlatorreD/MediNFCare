@@ -20,15 +20,34 @@ $data = json_decode(file_get_contents("php://input"));
 
 switch($request_method) {
     case 'POST':
-        if (!empty($data->correo) && !empty($data->contrasena)) {
+        // Verifica que todos los campos requeridos no estén vacíos
+        if (!empty($data->nombres) &&
+            !empty($data->primer_apellido) &&
+            !empty($data->segundo_apellido) &&
+            !empty($data->telefono) &&
+            !empty($data->correo) &&
+            !empty($data->direccion) &&
+            !empty($data->fecha_nacimiento) &&
+            !empty($data->genero) &&
+            !empty($data->usuario) &&
+            !empty($data->contrasena) &&
+            !empty($data->id_rol)) {
+            
+            // Asigna los datos a las propiedades del objeto usuario
+            $usuario->nombres = $data->nombres;
+            $usuario->primer_apellido = $data->primer_apellido;
+            $usuario->segundo_apellido = $data->segundo_apellido;
+            $usuario->telefono = $data->telefono;
             $usuario->correo = $data->correo;
-            $usuario->contrasena = $data->contrasena;
-            $usuario->rol_id = isset($data->rol_id) ? $data->rol_id : null;
-            $usuario->departamento_id = isset($data->departamento_id) ? $data->departamento_id : null;
-            $usuario->token_recuperacion = isset($data->token_recuperacion) ? $data->token_recuperacion : null;
-            $usuario->fecha_expiracion_token = isset($data->fecha_expiracion_token) ? $data->fecha_expiracion_token : null;
-            $usuario->activo = isset($data->activo) ? $data->activo : true;
-
+            $usuario->direccion = $data->direccion;
+            $usuario->fecha_nacimiento = $data->fecha_nacimiento;
+            $usuario->genero = $data->genero;
+            $usuario->estado = isset($data->estado) ? $data->estado : true;
+            $usuario->usuario = $data->usuario;
+            $usuario->contrasena = password_hash($data->contrasena, PASSWORD_DEFAULT); // Asegúrate de encriptar la contraseña
+            $usuario->rol_id = $data->id_rol;
+    
+            // Intenta crear el usuario en la base de datos
             if ($usuario->create()) {
                 http_response_code(201);
                 echo json_encode(array("message" => "Usuario creado correctamente."));
@@ -40,7 +59,7 @@ switch($request_method) {
             http_response_code(400);
             echo json_encode(array("message" => "Datos incompletos."));
         }
-        break;
+        break;    
 
     case 'GET':
         if (isset($_GET['id'])) {
