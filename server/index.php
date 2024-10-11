@@ -36,6 +36,11 @@
           include_once $baseDir . '/controller/usuario.php';
         }else if (strpos($request_uri, '/server/login') !== false) {
           include_once $baseDir . '/controller/login.php';
+        }else if (strpos($request_uri, '/server/deleteToken') !== false) {
+          include_once $baseDir . '/controller/deleteToken.php';
+        }else if (strpos($request_uri, '/server/logout') !== false) {
+          include_once $baseDir . '/controller/logout.php';
+          
         } elseif (strpos($request_uri, '/server/status') !== false) {
           header('Content-Type: application/json');
           echo json_encode(array("message" => "Servidor funcionando correctamente"));

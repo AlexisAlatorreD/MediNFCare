@@ -17,38 +17,26 @@ $usuario = new Usuario($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
+// Verificar si el token existe
 if (!empty($data->token)) {
-    // Asignar el token si existe, dando prioridad a $data->token
+    // Obtener el token desencriptado del cliente
     $usuario->token = $data->token;
 
     if (isset($usuario->token)) {
-        $verify_token = $usuario->VerifyTokenExist($usuario->token);
 
-        if ($verify_token) {
-            // Verificar si uno de los elementos no está presente
-            if (empty($data->token)) {
-                $token_insertado = $usuario->delete_token_sesion($usuario->token);
-
-                http_response_code(200);
-                echo json_encode(array(
-                    "message" => "Se cerró la sesión debido a la ausencia del token en localStorage"
-                ));
-            } else {
-                http_response_code(200);
-                echo json_encode(array(
-                    "message" => "El token está presente y la sesión continúa"
-                ));
-            }
+            $token_insertado = $usuario->delete_token_sesion($usuario->token);
+            
+            http_response_code(200);
+            echo json_encode(array(
+                "message" => "Se cerró la sesión correctamente"
+            ));
         } else {
             http_response_code(401);
-            echo json_encode(array("message" => "No se encuentra el token"));
+            echo json_encode(array("message" => "El token no existe o no coincide"));
         }
     } else {
         http_response_code(401);
-        echo json_encode(array("message" => "No se encuentra el token"));
-    }
-} else {
-    http_response_code(400);
-    echo json_encode(array("message" => "Error al cerrar sesión"));
+        echo json_encode(array("message" => "No se encuentra el token en la base de datos"));
 }
+
 ?>

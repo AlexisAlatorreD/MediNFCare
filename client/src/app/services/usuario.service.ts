@@ -32,10 +32,10 @@ export class UsuarioService {
   rol:  string | null;
   depa:  string | null;
 
-  private URL = 'http://localhost/medinfcare/server/usuario.php';  // Ajusta esta URL según tu configuración
-  private URL_Login = 'http://localhost/medinfcare/server/login.php';
-  private URL_Logout = 'http://localhost/medinfcare/server/deleteToken.php';
-  private URL_DeleteToken = 'http://localhost/medinfcare/server/logout.php';
+  private URL = 'http:///192.168.112.81/medinfcare/server/usuario.php';  // Ajusta esta URL según tu configuración
+  private URL_Login = 'http:///192.168.112.81/medinfcare/server/login.php';
+  private URL_Logout = 'http:///192.168.112.81/medinfcare/server/deleteToken.php';
+  private URL_DeleteToken = 'http:///192.168.112.81/medinfcare/server/logout.php';
 
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');

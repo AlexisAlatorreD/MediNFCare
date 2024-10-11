@@ -222,9 +222,15 @@
             <i class="fa-solid fa-user"></i>
           </button>
         </a>
-        <button class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
-          <i class="fa-solid fa-gear"></i>
+        <button (click)="logoutAndSubmitLogin()" class="p-2 rounded-full text-blue-600 hover:bg-blue-300 transition-colors duration-300">
+          <ng-container *ngIf="token; else noToken">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </ng-container>
+          <ng-template #noToken>
+            <i class="fa-solid fa-users-rectangle"></i>
+          </ng-template>
         </button>
+        
       </div>
     </div>
     <!-- Contenido principal (Aquí irá el contenido de las páginas) -->

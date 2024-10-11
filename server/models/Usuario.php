@@ -220,29 +220,27 @@ class Usuario {
 
         return false;
     }
-
-    // Verificar si el token existe
-    function VerifyTokenExist($token) {
-        $query = "SELECT * FROM " . $this->table_token . " WHERE token = :token";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":token", $token);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
-    }
-
-    // Eliminar token de sesión
+    
     function delete_token_sesion($token) {
-        $query = "DELETE FROM " . $this->table_token . " WHERE token = :token";
+        // Primero busca el hash almacenado
+        $query = "SELECT token FROM " . $this->table_token . " LIMIT 1"; // Ajusta la lógica
         $stmt = $this->conn->prepare($query);
-
-        $this->token = htmlspecialchars(strip_tags($this->token));
-        $stmt->bindParam(':token', $token);
-
-        if ($stmt->execute()) {
-            return true;
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result && password_verify($token, $result['token'])) {
+            // Si coincide, entonces elimina usando el hash almacenado
+            $query_delete = "DELETE FROM " . $this->table_token . " WHERE token = :hash";
+            $stmt_delete = $this->conn->prepare($query_delete);
+            $stmt_delete->bindParam(':hash', $result['token']);
+            
+            return $stmt_delete->execute();
         }
+    
         return false;
     }
+    
 
     // Generar token de recuperación
     function generateRecoveryToken() {

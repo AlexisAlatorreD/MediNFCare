@@ -20,12 +20,9 @@ $data = json_decode(file_get_contents("php://input"));
 if (
     !empty($data->token)
 ) {
+    $usuario->token = $data->token;
     
-        $usuario->token = $data->token;
-    
-    if (isset($usuario->token)) {
-
-        $token_insertado = $usuario->delete_token_sesion($usuario->token);// Insertar token en la base de datos
+    if ($usuario->delete_token_sesion($usuario->token)) {
 
         http_response_code(200);
         echo json_encode(array(
@@ -43,7 +40,7 @@ if (
         ));
     } else {
         http_response_code(401);
-        echo json_encode(array("message" => "No se encuentra el token"));
+        echo json_encode(array("message" => "No se encuentra el token2"));
     }
 } else {
     http_response_code(400);
